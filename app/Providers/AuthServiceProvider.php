@@ -32,7 +32,7 @@ class AuthServiceProvider extends ServiceProvider
             $router->forTransientTokens();
         });
         
-        Passport::tokensExpireIn(Carbon::now()->addMinutes(30));
-        Passport::refreshTokensExpireIn(Carbon::now()->addDays(10)); // El refresh token siempre debe durar mucho mas que el token actual, se puede solicitar un nuevo token luego de que este haya expirado, con el refresh. De esa forma podemos realizar la prueba de usuario autenticado con el nuevo toquen adquirido gracias al refresh token
+        Passport::tokensExpireIn(Carbon::now()->addMinutes(60));
+        Passport::refreshTokensExpireIn(Carbon::now()->addDays(30)); // El refresh token siempre debe durar mucho mas que el token actual, se puede solicitar un nuevo token luego de que este haya expirado, con el refresh. De esa forma podemos realizar la prueba de usuario autenticado con el nuevo toquen adquirido gracias al refresh token
     }
 }
