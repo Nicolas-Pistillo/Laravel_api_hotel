@@ -26,4 +26,5 @@ class ApiController extends Controller
         ];
         return response()->json($response,$code);
     }
+
 }
