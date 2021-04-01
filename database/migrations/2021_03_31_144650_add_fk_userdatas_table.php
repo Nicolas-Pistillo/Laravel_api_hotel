@@ -15,7 +15,7 @@ class AddFkUserdatasTable extends Migration
     {
         Schema::table('userdatas', function (Blueprint $table) {
             $table->unsignedBigInteger('id_user')->after('id');
-            $table->foreign('id_user')->references('id')->on('users');
+            $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
