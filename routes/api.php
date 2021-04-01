@@ -4,7 +4,8 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\UserdataController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\ActivityController;
+use App\Models\User;
 
 // NO AUTH ROUTES
 
@@ -12,15 +13,16 @@ use Illuminate\Support\Facades\Route;
 Route::post('/register',[RegisterController::class,"store"]);
 
 // USERS
-Route::get('/users', [UserdataController::class,"index"]);
 
-Route::get('/users/{id}', [UserdataController::class,"show"]);
+Route::put('users', [UserdataController::class,"update"]);
 
-Route::post('/users',[UserdataController::class,"store"]);
+Route::delete('users', [UserdataController::class,"destroy"]);
 
-Route::put('/users',[UserdataController::class,"update"]);
+Route::resource('users', UserdataController::class);
 
-Route::delete('/users', [UserdataController::class,"destroy"]);
+// ACTIVITIES
+
+Route::resource('activities',ActivityController::class);
 
 // AUTH ROUTES GROUP
 Route::group(['middleware' => 'auth:api'],function() {
