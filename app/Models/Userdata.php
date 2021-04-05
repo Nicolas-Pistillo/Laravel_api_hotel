@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Userdata extends Model
 {
     use HasFactory;
+
+    public function getConfirms() {
+        return $this->hasMany(Confirmation::class,"id_user");
+    }
 }

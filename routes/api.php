@@ -2,10 +2,9 @@
 
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\UserdataController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\ConfirmationsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ActivityController;
-use App\Models\User;
 
 // NO AUTH ROUTES
 
@@ -27,6 +26,15 @@ Route::put('activities', [ActivityController::class,"update"]);
 Route::put('activities/{id}',[ActivityController::class,"changeActive"]);
 
 Route::resource('activities',ActivityController::class);
+
+// CONFIRMATIONS
+
+Route::delete('confirmations', [ConfirmationsController::class,"delete"]);
+
+Route::get('userconfirms/{id}', [ConfirmationsController::class,"userConfirms"]);
+
+Route::resource('confirmations', ConfirmationsController::class);
+
 
 // AUTH ROUTES GROUP
 Route::group(['middleware' => 'auth:api'],function() {
