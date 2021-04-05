@@ -22,6 +22,10 @@ Route::resource('users', UserdataController::class);
 
 // ACTIVITIES
 
+Route::put('activities', [ActivityController::class,"update"]);
+
+Route::put('activities/{id}',[ActivityController::class,"changeActive"]);
+
 Route::resource('activities',ActivityController::class);
 
 // AUTH ROUTES GROUP
