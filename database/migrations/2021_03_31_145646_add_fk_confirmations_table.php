@@ -15,10 +15,10 @@ class AddFkConfirmationsTable extends Migration
     {
         Schema::table('confirmations', function (Blueprint $table) {
             $table->unsignedBigInteger('id_user')->after('id');
-            $table->foreign('id_user')->references('id')->on('users');
+            $table->foreign('id_user')->references('id')->on('users')->onUpdate('cascade');
 
             $table->unsignedBigInteger('id_activity')->after('id_user');
-            $table->foreign('id_activity')->references('id')->on('activities');
+            $table->foreign('id_activity')->references('id')->on('activities')->onUpdate('cascade');
         });
     }
 

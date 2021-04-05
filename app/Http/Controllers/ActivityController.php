@@ -86,7 +86,7 @@ class ActivityController extends ApiController
 
         $activity->save();
 
-        return $this->sendSuccess($activity,"Actividad desactivada");
+        return $this->sendSuccess($activity,"Estado de actividad modificado con éxito");
     }
 
     public function show($id,Request $req) {
