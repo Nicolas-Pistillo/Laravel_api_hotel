@@ -36,6 +36,10 @@ Route::get('userconfirms/{id}', [ConfirmationsController::class,"userConfirms"])
 Route::resource('confirmations', ConfirmationsController::class);
 
 
+// ONE SIGNAL
+
+Route::put('users/addOneSignal/{id}', [UserdataController::class,"addOneSignal"]);
+
 // AUTH ROUTES GROUP
 Route::group(['middleware' => 'auth:api'],function() {
     Route::post('/testOauth', [RegisterController::class,"testOauth"]);

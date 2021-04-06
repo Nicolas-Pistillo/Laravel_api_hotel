@@ -10,6 +10,29 @@ use Illuminate\Support\Facades\Validator;
 
 class UserdataController extends ApiController
 {
+
+    public function addOneSignal($id,Request $req) {
+        $user = Userdata::find($id);
+
+        if (!$user) {
+            return $this->sendError($user,"No existe un usuario con ese ID");
+        }
+
+        $validation = Validator::make($req->all(),[
+            'oneSignalID' => 'required'
+        ]);
+
+        if ($validation->fails()) {
+            return $this->sendError($validation->errors(),"Error en la acreditacion de datos",403);
+        }
+
+        $user->id_one_signal = $req->get('oneSignalID');
+
+        $user->save();
+
+        return $this->sendSuccess($user,"one_signal ID acreditado con éxito");
+    }
+
     public function index() {
 
         $users = DB::table('users')

@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Confirmation;
 use App\Models\Userdata;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+use OneSignal;
 
 class ConfirmationsController extends ApiController
 {
@@ -45,6 +47,22 @@ class ConfirmationsController extends ApiController
         }
 
         $new_confirmation = Confirmation::create($req->all());
+
+        // One Signal
+
+        $users_activity = DB::table('confirmations')
+        ->where('confirmations.id_activity','=',$req->get('id_activity'))
+        ->join('userdatas','confirmations.id_user','userdatas.id_user')
+        ->select('userdatas.id_one_signal')
+        ->get();
+
+        foreach($users_activity as $user) {
+            $id = $user->id_one_signal;
+
+            OneSignal::sendNotificationToUser("$user->name Se ha unido a $current_confirmed->name",$id);
+        }
+
+        // Return Success API response
 
         return $this->sendSuccess($new_confirmation,"Confirmacion aceptada");
 
